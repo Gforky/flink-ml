@@ -239,4 +239,42 @@ public class ExampleStages {
             sum += input.getValue();
         }
     }
+
+    /**
+     * A Transformer subclass that takes 2 inputs and returns the union of these two inputs as the
+     * output.
+     */
+    static class UnionAlgoOperator implements Transformer<UnionAlgoOperator> {
+        private final Map<Param<?>, Object> paramMap = new HashMap<>();
+
+        public UnionAlgoOperator() {
+            ParamUtils.initializeMapWithDefaultValues(paramMap, this);
+        }
+
+        @Override
+        public Map<Param<?>, Object> getParamMap() {
+            return paramMap;
+        }
+
+        @Override
+        public Table[] transform(Table... inputs) {
+            Assert.assertEquals(2, inputs.length);
+            StreamTableEnvironment tEnv =
+                    (StreamTableEnvironment) ((TableImpl) inputs[0]).getTableEnvironment();
+
+            DataStream<Integer> inputA = tEnv.toDataStream(inputs[0], Integer.class);
+            DataStream<Integer> inputB = tEnv.toDataStream(inputs[1], Integer.class);
+
+            return new Table[] {tEnv.fromDataStream(inputA.union(inputB))};
+        }
+
+        @Override
+        public void save(String path) throws IOException {
+            ReadWriteUtils.saveMetadata(this, path);
+        }
+
+        public static UnionAlgoOperator load(String path) throws IOException {
+            return ReadWriteUtils.loadStageParam(path);
+        }
+    }
 }
