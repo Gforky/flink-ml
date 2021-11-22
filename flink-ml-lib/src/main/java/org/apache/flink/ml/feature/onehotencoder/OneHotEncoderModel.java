@@ -18,7 +18,6 @@
 
 package org.apache.flink.ml.feature.onehotencoder;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
@@ -50,6 +49,8 @@ import org.apache.flink.table.runtime.typeutils.ExternalTypeInfo;
 import org.apache.flink.types.Row;
 import org.apache.flink.util.Preconditions;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
@@ -59,8 +60,7 @@ import java.util.function.Function;
  * OneHotEncoder}.
  */
 public class OneHotEncoderModel
-        implements Model<OneHotEncoderModel>,
-                OneHotEncoderModelParams<OneHotEncoderModel> {
+        implements Model<OneHotEncoderModel>, OneHotEncoderModelParams<OneHotEncoderModel> {
     private final Map<Param<?>, Object> paramMap = new HashMap<>();
     private Table modelTable;
 
@@ -129,7 +129,7 @@ public class OneHotEncoderModel
                 BroadcastUtils.withBroadcastStream(
                         Collections.singletonList(input), broadcastMap, function);
 
-    Table outputTable = tEnv.fromDataStream(output);
+        Table outputTable = tEnv.fromDataStream(output);
 
         return new Table[] {outputTable};
     }
