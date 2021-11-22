@@ -308,10 +308,10 @@ under the License.
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--      </plugin>-->
 
       <plugin>
         <groupId>org.apache.rat</groupId>
