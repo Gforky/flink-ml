@@ -16,10 +16,7 @@ import org.apache.flink.types.Row;
 
 import org.apache.commons.collections.IteratorUtils;
 
-<<<<<<< HEAD
-=======
 import java.io.File;
->>>>>>> 1fd7a3ed683c8fde40b9e040c601a0a513f32034
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,20 +94,13 @@ public class ClinkExample {
     }
 
     public static void main(String[] args) throws IOException {
-<<<<<<< HEAD
         String rescDirPath = ClinkExample.class.getClassLoader().getResource("feature").getPath();
         System.out.println(rescDirPath);
         clinkSoPath =
                 rescDirPath + "/libperception_feature_plugin.dylib";
         confRemotePath = "";
         confLocalPath = rescDirPath + "/clink_conf";
-=======
-        String rescDirPath = new File(".").getCanonicalPath();
-        clinkSoPath =
-                rescDirPath + "/src/resources/feature/libperception_feature_plugin.dylib";
-        confRemotePath = "";
-        confLocalPath = rescDirPath + "/src/resources/feature/clink_conf";
->>>>>>> 1fd7a3ed683c8fde40b9e040c601a0a513f32034
+
         final MultipleParameterTool params = MultipleParameterTool.fromArgs(args);
 
         if (params.has("clinkSoPath")) {
@@ -140,28 +130,17 @@ public class ClinkExample {
 
         trainData =
                 new Row[] {
-<<<<<<< HEAD
                         Row.of(0.0), Row.of(1.0), Row.of(2.0), Row.of(0.0),
-=======
-                    Row.of(0.0), Row.of(1.0), Row.of(2.0), Row.of(0.0),
->>>>>>> 1fd7a3ed683c8fde40b9e040c601a0a513f32034
                 };
 
         predictData = trainData;
 
         expectedClinkOutput =
                 new Row[] {
-<<<<<<< HEAD
                         Row.of(Row.of("0:0 ")),
                         Row.of(Row.of("0:1 ")),
                         Row.of(Row.of("0:0 ")),
                         Row.of(Row.of("0:2 ")),
-=======
-                    Row.of(Row.of("0:0 ")),
-                    Row.of(Row.of("0:1 ")),
-                    Row.of(Row.of("0:0 ")),
-                    Row.of(Row.of("0:2 ")),
->>>>>>> 1fd7a3ed683c8fde40b9e040c601a0a513f32034
                 };
 
         inputCols = new String[] {"f0"};
@@ -170,8 +149,4 @@ public class ClinkExample {
         OneHotEncoderModel model = getModel();
         checkClinkResult(model);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1fd7a3ed683c8fde40b9e040c601a0a513f32034
